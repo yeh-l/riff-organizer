@@ -1,0 +1,114 @@
+<!doctype html>
+<html class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Riff Organizer</title>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' blob: 'wasm-unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob: data:; connect-src 'self' blob: file: data:"
+    />
+    <link href="./assets/main.css" type="text/css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div id="app">
+      <audio id="audio-player"></audio>
+      <aside id="sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-section-header">
+            <div class="sidebar-section-title">Library</div>
+            <div class="sidebar-header-actions">
+              <button
+                id="add-group-button"
+                class="btn tooltip"
+                data-tooltip="Create riff group"
+                data-side="bottom"
+                aria-label="Create riff group"
+              >
+                +
+              </button>
+              <button
+                id="settings-button"
+                class="btn tooltip"
+                data-tooltip="Settings"
+                data-side="bottom"
+                aria-label="Settings"
+              ></button>
+            </div>
+          </div>
+          <button id="favorites-button" class="btn">☆ Favorites</button>
+          <div id="group-filters" class="scrollbar-sm"></div>
+        </div>
+        <div class="sidebar-section projects-section">
+          <div class="sidebar-section-title">Projects</div>
+
+          <div id="project-filters" class="scrollbar-sm"></div>
+        </div>
+      </aside>
+      <div
+        id="sidebar-resizer"
+        role="separator"
+        aria-label="Resize sidebar"
+        aria-orientation="vertical"
+        aria-valuemin="180"
+        aria-valuemax="360"
+        tabindex="0"
+      ></div>
+      <main id="main-content">
+        <div id="main-header">
+          <div id="group-sort-container">
+            <div id="group-by-container" class="library-control">
+              <span class="library-control-label">Group by</span>
+            </div>
+            <div id="sort-by-container" class="library-control">
+              <span class="library-control-label">Sort by</span>
+            </div>
+          </div>
+          <input id="riff-search" class="input" type="search" placeholder="Search riffs..." />
+        </div>
+        <div id="riff-list" class="scrollbar"></div>
+      </main>
+      <footer id="player">
+        <button id="player-play-button" class="btn">&#x25B6;&#xFE0E;</button>
+
+        <span id="current-time">0:00</span>
+        <span style="color: var(--muted-foreground)">/</span>
+        <span id="duration">0:00</span>
+        <input id="progress" class="input w-full" type="range" min="0" value="0" step="0.01" />
+        <div id="amp-control" class="amp-control">
+          <button id="amp-button" class="btn active" data-variant="outline"></button>
+          <div id="amp-popover" class="amp-popover">
+            <div class="amp-popover-title">Amp Model</div>
+
+            <div class="amp-file-row">
+              <div id="current-amp" class="current-amp">Not Loaded</div>
+              <button id="choose-amp-button" class="btn" data-variant="outline">Load</button>
+            </div>
+          </div>
+        </div>
+        <div id="cab-control" class="cab-control">
+          <button id="cab-button" class="btn active" data-variant="outline"></button>
+          <div id="cab-popover" class="cab-popover">
+            <div class="cab-popover-title">Cabinet (IR)</div>
+
+            <div class="cab-file-row">
+              <div id="current-cab" class="current-cab">Not Loaded</div>
+              <button id="choose-cab-button" class="btn" data-variant="outline">Load</button>
+            </div>
+          </div>
+        </div>
+        <div class="volume-control">
+          <input
+            id="volume-slider"
+            class="input w-full"
+            type="range"
+            min="0"
+            max="100"
+            value="100"
+          />
+        </div>
+      </footer>
+    </div>
+    <script type="module" src="./src/renderer.ts"></script>
+  </body>
+</html>

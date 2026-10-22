@@ -1,0 +1,42 @@
+appId: com.rifforganizer.app
+productName: Riff Organizer
+directories:
+  buildResources: build
+files:
+  - "!**/.vscode/*"
+  - "!src/*"
+  - "!electron.vite.config.{js,ts,mjs,cjs}"
+  - "!{.eslintcache,eslint.config.mjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}"
+  - "!{.env,.env.*,.npmrc,pnpm-lock.yaml}"
+  - "!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}"
+asarUnpack:
+  - resources/**
+win:
+  executableName: riff-organizer
+nsis:
+  artifactName: ${name}-${version}-setup.${ext}
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  perMachine: true
+  shortcutName: ${productName}
+  uninstallDisplayName: ${productName}
+mac:
+  entitlementsInherit: build/entitlements.mac.plist
+  extendInfo:
+    - NSDocumentsFolderUsageDescription: Riff Organizer needs access to project and audio files you choose to import.
+    - NSDownloadsFolderUsageDescription: Riff Organizer needs access to project and audio files you choose to import.
+  notarize: false
+dmg:
+  artifactName: ${name}-${version}.${ext}
+linux:
+  target:
+    - AppImage
+    - snap
+    - deb
+  maintainer: riff-organizer
+  category: Utility
+appImage:
+  artifactName: ${name}-${version}.${ext}
+npmRebuild: false
+electronDownload:
+  mirror: https://npmmirror.com/mirrors/electron/
