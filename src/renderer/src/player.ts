@@ -91,7 +91,7 @@ async function startPlayback(): Promise<void> {
   const riffLength = currentItem.length ?? 0
   let sourceOffset = currentItem.sourceOffset ?? 0
 
-  if (sourceOffset < 0 || currentBuffer.duration - sourceOffset < (currentItem.length ?? 0)) {
+  if (sourceOffset < 0 || currentBuffer.duration - sourceOffset < 2) {
     sourceOffset = 0
   }
 
